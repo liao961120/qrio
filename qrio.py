@@ -37,7 +37,7 @@ def encode_txt(fp, outdir=None):
 
     # Encode chunk of codes to QR code
     outfp = []
-    d = chunk(ascii_encoded_bytes)
+    d = chunk(ascii_encoded_bytes, size=1200)
     for i, p in enumerate(d):
         qr = pyqrcode.create(p)
         img = outdir / f'qr_{i}.png'
@@ -46,8 +46,8 @@ def encode_txt(fp, outdir=None):
     return outfp
 
 
-def chunk(string, n=1000):
-    chunks = [string[i:i+n] for i in range(0, len(string), n)]
+def chunk(string, size):
+    chunks = [string[i:i+size] for i in range(0, len(string), size)]
     return chunks
 
 def encode_base64(s):
